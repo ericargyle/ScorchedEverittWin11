@@ -13,3 +13,8 @@ assert len(refs)==53,len(refs)
 assert manifest['picts/land.png']['size']==[640,3970]
 for i in range(1,7): assert manifest[f'picts/tank{i}.png']['size']==[60,600]
 print(f'{len(manifest)} PNG hashes/dimensions verified; all {len(refs)} source runtime PNG declarations covered')
+
+binary=json.loads((root/'reference/binary-resource-strings.json').read_text())
+binary_refs={s[s.index('picts'):].replace(chr(92),'/') for s in binary}
+assert binary_refs==refs, "DOS binary/source filename mismatch"
+print("DOS binary/source runtime filename sets equal (53); not instruction equivalence")

@@ -19,7 +19,7 @@ Authority: reference/main.asm, 6592 lines, upstream c2f02732b4c0cf58d0abfa130fd2
 - Portable libm is not guaranteed bit-identical to x87 FSINCOS at pathological rounding boundaries. Binary32 stored values, ties-to-even integer rounding and source equations are covered by regressions.
 - Out-of-range DOS memory corruption is prevented; a finite shot safety limit avoids hangs. Resize/DPI letterboxing and intro skipping are additions.
 - Original options saved-copy fields are uninitialized on first entry; this port initializes them to the intended documented defaults instead of reproducing that defect.
-- Explosions and crater rings use source midpoint/flood operations, but the original 600-radius death animation is being adapted; see release notes. UI redraw ordering and source rollover partial-screen offset quirks are not pixel-equivalence certified.
+- Explosions and crater rings use source midpoint/flood operations, including the original 600-radius death animation with bounded frame batching. UI redraw ordering and source rollover partial-screen offset quirks are not pixel-equivalence certified.
 - Audio uses square-wave PCM on the default Windows output, not a physical PC speaker. Sound quality and scheduling differ.
 
 ## Evidence
