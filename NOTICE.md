@@ -1,0 +1,6 @@
+# Attribution and rights
+Scorched Everitt is the ECE 291 Fall 2001 final project by Suneil Hosmane (team leader), Terrence B. Janas, and Yajur Parikh, University of Illinois at Urbana-Champaign, completed December 6, 2001.
+
+Original source, artwork and project document are from https://github.com/tjanas/uiuc_ece291/tree/main/scorch at commit c2f02732b4c0cf58d0abfa130fd274d018ac7f85. Original author comments are retained in reference/main.asm. The original archive contained no explicit license granting general redistribution or modification rights. Public GitHub availability is not a license. No new license is imposed on the original work or its derivative translation; rights remain with their respective holders. This preservation port is published at the request of the repository owner, not as a claim of permission from original rightsholders. Contact those rightsholders before further reuse.
+
+Native C++ translation and Windows integration were prepared in 2026 for ericargyle. No affiliation or endorsement by the original authors or university is implied. No DOS executable, emulator, Electron, browser engine, compatibility layer, or third-party runtime is included in the downloadable game.

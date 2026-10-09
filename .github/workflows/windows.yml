@@ -1,0 +1,43 @@
+name: Native Windows build
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify original asset hashes and source coverage
+        run: python tests/assets_test.py
+      - name: Configure native MSVC x64
+        run: cmake -S . -B build -A x64
+      - name: Build native game and tests
+        run: cmake --build build --config Release --parallel
+      - name: Run native regression and smoke tests
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force package/ScorchedEverittWin11
+          Copy-Item build/Release/ScorchedEveritt.exe package/ScorchedEverittWin11/
+          Copy-Item -Recurse picts package/ScorchedEverittWin11/
+          Copy-Item README.md,NOTICE.md package/ScorchedEverittWin11/
+          Copy-Item -Recurse docs package/ScorchedEverittWin11/
+          Compress-Archive package/ScorchedEverittWin11 ScorchedEverittWin11-x64.zip
+          Get-FileHash ScorchedEverittWin11-x64.zip | Format-List | Out-File SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ScorchedEverittWin11-x64
+          path: |
+            ScorchedEverittWin11-x64.zip
+            SHA256.txt
+            build/smoke-*.bmp
+            build/smoke-result.txt
+            build/Testing/Temporary/LastTest.log
+      - name: Publish tagged release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create ${{ github.ref_name }} ScorchedEverittWin11-x64.zip SHA256.txt --title "Native Windows preview ${{ github.ref_name }}" --notes-file docs/RELEASE.md --prerelease

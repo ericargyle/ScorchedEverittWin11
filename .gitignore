@@ -1,0 +1,9 @@
+build/
+package/
+artifacts/
+tests/core_tests
+tests/render_tests
+*.zip
+smoke-*
+.DS_Store
+Thumbs.db
