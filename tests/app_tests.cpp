@@ -22,7 +22,7 @@ int main(){
  check(a.screen==Screen::Menu&&a.menu==0,"credits resets menu");a.key(VK_RETURN);
  a.key(VK_LEFT);check(a.selection==2,"tank left wrap");a.key(VK_DOWN);check(a.selection==5,"tank row toggle");
  a.key(VK_RETURN);a.character('A');a.character('a');a.character(' ');
- check(a.names[0]=="a ","player one alphabet and space");a.key(VK_BACK);a.key(VK_RETURN);
+ check(a.names[0]=="a ","player one alphabet and space");a.names[0]="ab";a.render();Image actual=a.frame;a.tankScreen();a.modal("namemenu.png",true);a.label("a",237,264);a.label("b",251,264);check(a.frame.pixels==actual.pixels,"name glyphs advance fourteen pixels");a.names[0]="a ";a.key(VK_BACK);a.key(VK_RETURN);
  a.key(VK_RETURN);a.character('b');a.character(' ');check(a.names[1]=="b","player two disallows space");
  for(int i=0;i<12;i++)a.character('c');check(a.names[1].size()==10,"name length");a.key(VK_RETURN);
  check(a.screen==Screen::Play&&a.game.players[0].model==6,"setup to game");
