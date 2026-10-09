@@ -6,7 +6,7 @@
 #include <fstream>
 namespace scorch {
 struct Image { int w=0,h=0; std::vector<uint32_t> pixels; Image()=default; Image(int W,int H,uint32_t c=0):w(W),h(H),pixels(W*H,c){} uint32_t get(int x,int y) const {return x>=0&&y>=0&&x<w&&y<h?pixels[y*w+x]:0;} void put(int x,int y,uint32_t c){if(x>=0&&y>=0&&x<w&&y<h)pixels[y*w+x]=c;} };
-inline uint32_t compose(uint32_t s,uint32_t d){uint32_t r=0,a=s>>24;for(int n=0;n<32;n+=8){int S=(s>>n)&255,D=(d>>n)&255;int c=((S*a+128)>>8)+D-((D*a+128)>>8);r|=uint32_t(std::clamp(c,0,255))<<n;}return r;}
+inline uint32_t compose(uint32_t s,uint32_t d){uint32_t r=0,a=s>>24;for(int n=0;n<32;n+=8){int S=(s>>n)&255,D=(d>>n)&255;int rounding=n==24?0:128;int c=((S*a+rounding)>>8)+D-((D*a+rounding)>>8);r|=uint32_t(std::clamp(c,0,255))<<n;}return r;}
 inline void blit(Image& d,const Image& s,int x,int y,int sx=0,int sy=0,int w=-1,int h=-1,bool alpha=false){if(w<0)w=s.w;if(h<0)h=s.h;for(int j=0;j<h;j++)for(int i=0;i<w;i++){if(i+sx<0||j+sy<0||i+sx>=s.w||j+sy>=s.h)continue;auto c=s.get(i+sx,j+sy);d.put(x+i,y+j,alpha?compose(c,d.get(x+i,y+j)):c);}}
 inline void dim(Image& d,uint32_t color=0xa0000000){for(auto& p:d.pixels)p=compose(color,p);}
 inline void rect(Image& d,int x,int y,int x2,int y2,uint32_t c,bool fill=false){for(int j=y;j<=y2;j++)for(int i=x;i<=x2;i++)if(fill||j==y||j==y2||i==x||i==x2)d.put(i,j,c);}

@@ -23,4 +23,6 @@ Authority: reference/main.asm, 6592 lines, upstream c2f02732b4c0cf58d0abfa130fd2
 - Audio uses square-wave PCM on the default Windows output, not a physical PC speaker. Sound quality and scheduling differ.
 
 ## Evidence
-86 portable source-derived core checks; nine renderer/intro checks; all 58 PNG hashes/dimensions and all 53 runtime resource declarations verified. Native Windows workflow builds x64 and runs these tests plus WIC image decoding and gameplay smoke rendering. Smoke BMPs are retained in Actions artifacts. These are regression/smoke checks, not a substitute for human playthrough and audiovisual A/B testing.
+86 portable source-derived core checks; 12 renderer/intro checks; all 58 PNG hashes/dimensions and all 53 runtime resource declarations verified. Native Windows workflow builds x64 and runs these tests plus WIC image decoding and gameplay smoke rendering. Smoke BMPs are retained in Actions artifacts. These are regression/smoke checks, not a substitute for human playthrough and audiovisual A/B testing.
+
+Follow-up review: [corrected gaps and remaining limits](REVIEW-2026-10-09.md). Adds actual native App state-machine tests and three full-pixel compositor checks (12 renderer checks total), alongside 86 core checks. Fixes alpha rounding, menu resets, keyboard/name behavior, nested backgrounds; guards the existing impact-delay origin.

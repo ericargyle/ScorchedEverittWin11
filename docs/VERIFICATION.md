@@ -11,3 +11,5 @@
 
 ## Not verified
 No actual Windows 11 human playthrough, hardware audio listening test, or side-by-side original DOS framebuffer/movie comparison. No blanket 1:1 parity assertion. Signed installer/Authenticode and ARM64-native builds are not supplied.
+
+Follow-up review: [corrected gaps and remaining limits](REVIEW-2026-10-09.md). Adds actual native App state-machine tests and three full-pixel compositor checks (12 renderer checks total), alongside 86 core checks. Fixes alpha rounding, menu resets, keyboard/name behavior, nested backgrounds; guards the existing impact-delay origin.
